@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- PRECHECK SECTION -->
+<section id="details">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="precheck-thumb">
+                    <div class="section-title">
+                            <h2>Catalog Details</h2>
+                            <p><strong>Detailed parameters for previous catalog</strong></p>
+                            <h4><span># Catalog ID : </span></h4> {{ details.id }}
+                            <h4><span># Time : </span></h4> {{ details.registor_time }}
+                            <h4><span># Message : </span></h4> {{ details.message }}
+                            <br>
+                            <a href="{% url 'histories' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to List</a>
+                            <br>
+                            <a href="{% url 'home' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to home</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
