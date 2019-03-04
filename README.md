@@ -1,4 +1,4 @@
-# vipr-django
+# vipr_django
 
 - Alternate solutions for DellEMC ViPR-Controller
 - Infrastructure operation automation with Python Django framework and custom ansible modules.
