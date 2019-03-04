@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- PRECHECK SECTION -->
+<section id="histories">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="precheck-thumb">
+                    <div class="section-title">
+                            <h2>Catalog Histories</h2>
+                            <p><strong>Previous catalog with message are shown below :</strong></p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Message</th>
+                                    </tr>
+                                </thead>
+                                {% for h in histories|dictsortreversed:"id"%}
+                                <tbody>
+                                    <tr>
+                                        <th><a href="{% url 'history' h.pk %}">{{ h.id }}</a></th>
+                                        <th><a href="{% url 'history' h.pk %}">{{ h.message }}</a></th>
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                            <a href="{% url 'home' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to home</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
