@@ -23,6 +23,7 @@
                                 <tbody>
                                     <tr>
                                         <th><a href="{% url 'history' h.pk %}">{{ h.id }}</a></th>
+                                        <th><a href="{% url 'history' h.pk %}">{{ h.register_time }}</a></th>
                                         <th><a href="{% url 'history' h.pk %}">{{ h.message }}</a></th>
                                     </tr>
                                 </tbody>

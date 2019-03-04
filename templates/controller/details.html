@@ -10,15 +10,24 @@
             <div class="col-md-12 col-sm-12">
                 <div class="precheck-thumb">
                     <div class="section-title">
-                            <h2>Catalog Details</h2>
-                            <p><strong>Detailed parameters for previous catalog</strong></p>
-                            <h4><span># Catalog ID : </span></h4> {{ details.id }}
-                            <h4><span># Time : </span></h4> {{ details.registor_time }}
-                            <h4><span># Message : </span></h4> {{ details.message }}
-                            <br>
-                            <a href="{% url 'histories' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to List</a>
-                            <br>
-                            <a href="{% url 'home' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to home</a>
+                        <h2>Catalog Details</h2>
+                        <p><strong>Detailed parameters for previous catalog</strong></p>
+                        <h4><span># Catalog ID : </span></h4> {{ details.id }}
+                        <h4><span># Time : </span></h4> {{ details.register_time }}
+                        <h4><span># Backend Array Name : </span></h4> {{ details.backend_array_name }}
+                        <h4><span># Backend StoragePool Name : </span></h4> {{ details.backend_storagepool_name }}
+                        <h4><span># VPLEX Name : </span></h4> {{ details.vplex_name }} 
+                        <h4><span># Primary MDS Switch : </span></h4> {{ details.primary_mds_switch }}
+                        <h4><span># Secondary MDS Switch : </span></h4> {{ details.secondary_mds_switch }}
+                        <h4><span># LUN Name of Backend : </span></h4> {{ details.lun_name_of_backend }}
+                        <h4><span># LUN Size : </span></h4> {{ details.lun_size }} 
+                        <h4><span># Thin Volume or Not : </span></h4> {{ details.thin_volume_or_not }}
+                        <h4><span># HLU on VPLEX : </span></h4> {{ details.hlu_on_vplex }}
+                        <h4><span># Message : </span></h4> {{ details.message }}
+                        <br>
+                        <a href="{% url 'histories' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to List</a>
+                        <br>
+                        <a href="{% url 'home' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to home</a>
                     </div>
                 </div>
             </div>
