@@ -1,0 +1,570 @@
+
+@import url('../fonts/Muli-Light.ttf');
+
+/*---------------------------------------
+Custom Configuration
+-----------------------------------------*/
+body {
+  background: #ffffff;
+  font-family: 'Muli', 'Verdana';
+  font-style: normal;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+/*---------------------------------------
+  Typorgraphy              
+-----------------------------------------*/
+
+h1,h2,h3,h4,h5,h6 {
+  font-style: normal;
+  font-weight: 200;
+  letter-spacing: 0px;
+}
+
+h1 {
+  color: #3d3d3f;
+  font-size: 50px;
+  line-height: normal;
+}
+
+h2 {
+  color: #575757;
+  font-size: 40px;
+  line-height: 52px;
+  margin-top: 0px;
+}
+
+h4 {
+  color: #797979;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+p {
+    color: #878787;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: 0.2px;
+}
+
+strong, span {
+  color: #878787;
+  font-weight: normal;
+}
+
+
+
+/*---------------------------------------
+  Buttons               
+-----------------------------------------*/
+
+.section-btn {
+  background: #d7b065;
+  border: none;
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1.6px;
+  padding: 14px 32px 18px 32px;
+  margin-top: 32px;
+  -webkit-transition: all ease-in-out 0.4s;
+  transition: all ease-in-out 0.4s;
+}
+
+.section-btn:focus,
+.section-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+
+
+/*---------------------------------------
+    General               
+-----------------------------------------*/
+
+html{
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #575757;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  text-decoration: none !important;
+}
+
+a:hover, a:active, a:focus {
+  color: #000000;
+  outline: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.section-title {
+  margin: 0;
+  padding-bottom: 32px;
+}
+
+#precheck, #choice, #maintenances,
+#operations, #redirect,
+#histories, #details, #topologies {
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+#precheck img {
+  border-radius: 5px;
+}
+
+#maintenances {
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+
+/*---------------------------------------
+  Pre loader section              
+-----------------------------------------*/
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  background: none repeat scroll 0 0 #ffffff;
+}
+
+.spinner {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  position: relative;
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 65px;
+  height: 65px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  border-top-color: #f9f9f9;
+  animation: spinner .9s linear infinite;
+}
+
+@-webkit-@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+
+
+/*---------------------------------------
+  Navigation section              
+-----------------------------------------*/
+
+.custom-navbar {
+  border: none;
+  margin-bottom: 0;
+  background-color: #ffffff;
+  padding-top: 22px;
+}
+
+.custom-navbar .navbar-brand {
+  color: #444;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.custom-navbar .nav li a {
+  font-size: 12px;
+  font-weight: normal;
+  color: #656565;
+  letter-spacing: 1px;
+  -webkit-transition: all ease-in-out 0.4s;
+  transition: all ease-in-out 0.4s;
+  padding: 0;
+  margin: 15px;
+}
+
+.custom-navbar .navbar-nav > li > a:hover,
+.custom-navbar .navbar-nav > li > a:focus {
+  background-color: transparent;
+  color: #454545;
+}
+
+.custom-navbar .navbar-nav li a:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0px;
+  height: 2px;
+  margin: auto;
+  background: transparent;
+  transition: width .3s ease, background-color .3s ease;
+}
+
+.custom-navbar .navbar-nav li a:hover:after,
+.custom-navbar .nav li.active > a:after {
+  background: #000000;
+  color: #ffffff;
+  width: 100%;
+}
+
+.custom-navbar .nav li.active > a {
+  background-color: transparent;
+  color: #454545;
+}
+
+.custom-navbar .navbar-toggle {
+  border: none;
+  padding-top: 12px;
+}
+
+.custom-navbar .navbar-toggle {
+  background-color: transparent;
+}
+
+.custom-navbar .navbar-toggle .icon-bar {
+  background: #000000;
+  border-color: transparent;
+}
+
+@media(min-width:768px) {
+    .custom-navbar {
+      border-bottom: 0;
+      background: 0 0; 
+    }
+    .custom-navbar.top-nav-collapse {
+      background: #ffffff;
+      box-shadow:0 40px 100px rgba(0,0,0,.2);
+      padding: 10px 0;
+    }
+
+}
+
+
+
+/*---------------------------------------
+  Home section              
+-----------------------------------------*/
+
+#home {
+  display: -webkit-box;
+  display: -webkit-flex;
+   display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+   align-items: center;
+  height: 100vh;
+  position: relative;
+  padding-top: 62px;
+}
+
+#home img {
+  width: 360px;
+  height: 120px;
+}
+
+
+/*---------------------------------------
+  precheck section
+-----------------------------------------*/
+
+#precheck .section-title {
+  padding-bottom: 16px;
+}
+
+#precheck .col-md-4 a {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin: 6px 6px 0px 0;
+}
+
+#precheck .precheck-thumb {
+  margin-top: 22px;
+}
+
+#precheck .precheck-thumb strong {
+  font-weight: normal;
+  display: block;
+  padding-top: 4px;
+}
+
+
+#precheck input {
+  height: 55px;
+  width: -webkit-fill-available;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+
+/*---------------------------------------
+  results section
+-----------------------------------------*/
+
+#results {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 80px;
+  padding-bottom: 60px;
+}
+
+.results-thumb strong,
+.results-thumb span {
+  color: #575757;
+  font-size: 16px;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.results-thumb .progress {
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: none;
+  height: 4px;
+}
+
+.results-thumb .progress-bar-primary {
+  background: #3d3d3f;
+}
+
+/*---------------------------------------
+  operations section
+-----------------------------------------*/
+
+#operations .form-control {
+  border-radius: 0px;
+  border-color: #f0f0f0;
+  box-shadow: none;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  -webkit-transition: all ease-in-out 0.4s;
+  transition: all ease-in-out 0.4s;
+}
+
+#operations .form-control:focus {
+  border-bottom: 2px solid #999999;
+}
+
+#operations input {
+  height: 30px;
+  width: -webkit-fill-available;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#operations button#submit {
+  background: #000000;
+  border: none;
+  border-radius: 50px;
+  color: #ffffff;
+  font-weight: 300;
+  height: 55px;
+  padding-bottom: 10px;
+  margin-top: 24px;
+}
+
+#operations button#submit:hover {
+  background: #d7b065;
+  color: #ffffff;
+}
+
+
+
+/*---------------------------------------
+  maintenances section
+-----------------------------------------*/
+
+#maintenances .maintenances-thumb {
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  -webkit-transition: all ease-in-out 0.4s;
+  transition: all ease-in-out 0.4s;
+}
+
+#maintenances .maintenances-thumb:hover {
+  background: #ffffff;
+  box-shadow: 0px 16px 22px 0px rgba(90, 91, 95, 0.3);
+  top: -5px;
+}
+
+#maintenances .maintenances-thumb img {
+  border-radius: 5px;
+  margin: auto;
+  padding-top: auto;
+  width: 240px;
+  height: 100px;
+}
+
+
+/* ------------------------------------- /
+/    Footer
+/* ------------------------------------- */
+#footer{
+  text-align: center;
+  padding: 40px 0;
+}
+
+/*  logo
+/*--------------------------------- */
+#footer .logo{
+  margin-top: 0;
+}
+
+.logo img {
+  margin: auto;
+  padding-top: auto;
+  width: 15%;
+  height: 15%;
+}
+
+.logo p {
+  margin: 0;
+  padding-top: 34px;
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  font-size: 26px;
+  color: #7E7E7E;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+
+/*  copy
+/*--------------------------------- */
+.copy{
+  margin-top: 20px;
+}
+
+/*---------------------------------------
+  Mobile Responsive styles              
+-----------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  #home {
+    height: 50vh;
+  }
+}
+
+@media (min-width: 667px) and (max-width: 767px) {
+  #home {
+    height: 140vh;
+  }
+}
+
+@media (min-width: 568px) and (max-width: 665px) {
+  #home {
+    height: 190vh;
+  }
+}
+
+@media (max-width: 980px) {
+
+ h1 {font-size: 33px;}
+
+ #maintenances .maintenances-thumb {
+  margin-top: 30px;
+ }
+
+}
+
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 30px;
+    line-height: normal;
+  }
+
+  h2  {font-size: 30px;}
+
+  .custom-navbar {
+    background-color: #ffffff;
+    box-shadow:0 40px 100px rgba(0,0,0,.2);
+    padding-top: 0px;
+    padding-bottom: 5px;
+  }
+
+  .custom-navbar .nav {
+    padding-bottom: 10px;
+  }
+
+  .custom-navbar .nav li a {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+}
+
+
+@media (max-width: 580px) {
+
+  #precheck .precheck-thumb {
+    margin-top: 0px;
+  }
+
+  .precheck-thumb .social-icon {
+    margin-bottom: 15px;
+  }
+
+}
+
+
+@media (max-width: 357px) {
+
+  h1 {
+    font-size: 28px;
+  }
+
+  #precheck .col-md-4 a {
+    width: 85px;
+    height: 85px;
+  }
+
+}
