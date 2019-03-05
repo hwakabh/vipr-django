@@ -3,8 +3,8 @@ from django.http import HttpResponse
 
 
 from controller.models import CatalogHistory
-# from controller.services import device_search
-# from controller.services import service_utils as svc
+from controller.services import device_search
+from controller.services import service_utils as svc
 
 from controller.forms import OperationForm
 from controller.forms import SearchForm
