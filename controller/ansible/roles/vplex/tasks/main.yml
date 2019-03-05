@@ -1,0 +1,46 @@
+---
+# Volume encapsulation
+- name: "Claim storage-volumes from masked backend volumes"
+  storage_volume:
+    target_vplex_name: "{{ volume.mapping_host }}"
+    # array_name: "EMC-CLARiiON-CKM00111000126"
+    array_name: "EMC-CLARiiON-CETV3183500058"
+    vpd_id: "{{ volume_vpd_id.ansible_facts.volume_id }}"
+    volume_name: "{{ volume.name }}"
+ 
+- name: "Create extents from storage-volumes"
+  extent:
+    target_vplex_name: "{{ volume.mapping_host }}"
+    volume_name: "{{ volume.name }}"
+
+- name: "Create local-device from extents"
+  local_device:
+    target_vplex_name: "{{ volume.mapping_host }}"
+    volume_name: "{{ volume.name }}"
+
+- name: "Create virtual-volume from local-devices"
+  virtual_volume:
+    target_vplex_name: "{{ volume.mapping_host }}"
+    volume_name: "{{ volume.name }}"
+
+# Volume assignment to server
+- name: "Register initiator-ports"
+  initiator_port:
+    target_vplex_name: "{{ volume.mapping_host }}"
+    target_server_name: "{{ server.hostname }}"
+    primary_initiator_pwwn: "{{ server.hbas.primary.pwwn }}"
+    primary_initiator_nwwn: "{{ server.hbas.primary.nwwn }}"
+    secondary_initiator_pwwn: "{{ server.hbas.secondary.pwwn }}"
+    secondary_initiator_nwwn: "{{ server.hbas.secondary.nwwn }}"
+
+- name: "Masking virtual-volumes to storage-view"
+  storage_view:
+    target_vplex_name: "{{ volume.mapping_host }}"
+    target_server_name: "{{ server.hostname }}"
+    # TODO: enabled to find vplex ports from vplex name
+    primary_frontend_port_0_name: "{{ vplex.primary_fe_port.0.name }}"
+    secondary_frontend_port_0_name: "{{ vplex.secondary_fe_port.0.name }}"
+    primary_frontend_port_1_name: "{{ vplex.primary_fe_port.1.name }}"
+    secondary_frontend_port_1_name: "{{ vplex.secondary_fe_port.1.name }}"
+    volume_name: "{{ volume.name }}"
+    host_volume_number: "{{ volume.hlu }}"

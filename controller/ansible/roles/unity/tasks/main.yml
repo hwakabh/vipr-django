@@ -1,0 +1,10 @@
+---
+- name: Create Volume on Unity
+  volume:
+    storage_name: "{{ backend_storage_name }}"
+    volume_name: "{{ volume.name }}"
+    volume_size_gb: "{{ volume.size }}"
+    is_thin_enabled: "{{ volume.is_thin }}"
+    target_pool_name:  "{{ volume.storage_pool }}"
+    target_host:  "{{ volume.mapping_host }}"
+  register: volume_vpd_id

@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  name: "Volume assign on Unity"
+  roles:
+    - unity
+
+# - hosts: localhost
+#   name: "Volume Encapsulation on VPLEX"
+#   roles:
+#     - vplex
+
+# - hosts: localhost
+#   name: "Create zones on Primary MDS"
+#   roles:
+#     - mds-primary
+
+# - hosts: localhost
+#   name: "Create zones on Secondary MDS"
+#   roles:
+#     - mds-secondary
