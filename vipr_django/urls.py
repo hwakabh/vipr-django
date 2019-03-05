@@ -17,7 +17,16 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 
+from controller.views import RunAnsible
+from controller.views import DeviceSearch
+from controller.urls import router as apirouter
+from django.views.decorators.csrf import csrf_exempt
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('controller/', include('controller.urls')),
+    path('api/v1/search/', csrf_exempt(DeviceSearch.as_view()), name='device_search'),
+    path('api/v1/operation/', csrf_exempt(RunAnsible.as_view()), name='run_ansible'),
+    path('api/v1/', include(apirouter.urls)),
 ]

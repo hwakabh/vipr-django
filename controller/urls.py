@@ -1,7 +1,11 @@
 from django.conf.urls import url
 from django.urls import path
 
+from rest_framework import routers
 from controller import views
+
+router = routers.DefaultRouter()
+router.register(r'cataloghist', views.CatalogViewSet)
 
 urlpatterns = [
     url(r'^uploads', views.upload_menu, name='uploads'),
