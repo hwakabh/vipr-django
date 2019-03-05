@@ -1,0 +1,22 @@
+---
+- name: "Device-alias registraiton"
+  device_alias:
+    target_switch: "{{ switches.primary.switch_name }}"
+    target_server_name: "{{ server.hostname }}"
+    alias_name: "{{ server.hostname }}_HBA00"
+    server_side_pwwn: "{{ server.hbas.primary.pwwn }}"
+
+- name: "Zoning"
+  zone:
+    target_switch: "{{ switches.primary.switch_name }}"
+    vsan_id: "{{ switches.primary.vsan_id }}"
+    server_side_pwwn: "{{ server.hbas.primary.pwwn }}"
+    target_vplex: "{{ volume.mapping_host }}"
+
+- name: "Zoneset Activation"
+  zoneset:
+    target_switch: "{{ switches.primary.switch_name }}"
+    vsan_id: "{{ switches.primary.vsan_id }}"
+    zoneset_name: "{{ switches.primary.zoneset_name }}"
+    server_side_pwwn: "{{ server.hbas.primary.pwwn }}"
+    target_vplex: "{{ volume.mapping_host }}"

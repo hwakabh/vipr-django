@@ -1,0 +1,12 @@
+backend_storage_name: UNITY_PSD
+hosts: localhost
+server:
+  hbas:
+    primary: {pwwn: '21:00:00:24:ff:8b:8a:12'}
+    secondary: {pwwn: '21:00:00:24:ff:8b:8a:13'}
+  hostname: modification_test
+switches:
+  primary: {switch_name: MDS9222#1, vsan_id: 2, zoneset_name: Fixed_TSLAB_Zoneset_VSAN2}
+  secondary: {switch_name: MDS9222#2, vsan_id: 100, zoneset_name: Fixed_TSLAB_Zoneset_VSAN2}
+volume: {hlu: '10', is_thin: 'on', mapping_host: Fixed_VPLEX, name: lun_name_modification_test,
+  size: '10', storage_pool: Pool0}

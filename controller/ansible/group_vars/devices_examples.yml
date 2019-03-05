@@ -1,0 +1,136 @@
+vnx5300_1:
+  name: "VNX5300#1"
+  description: ""
+  location: "EMC"
+  serial_number: ""
+  credentials:
+    - purpose: "SPA"
+      ip_address: "10.118.45.133"
+      username: "sysadmin"
+      password: "sysadmin"
+    - purpose: "SPB"
+      ip_address: "10.118.45.133"
+      username: "sysadmin"
+      password: "sysadmin"
+  connect_devices:
+    - "mds9222_1"
+    - "mds9222_2"
+
+vplex_psd:
+  name: "VPLEX_PSD"
+  description: "VS6 Model Federrer"
+  location: "EMC"
+  serial_number: "CKM00120900782"
+  credentials:
+    - purpose: "Management Access"
+      ip_address: "10.118.45.74"
+      username: "service"
+      password: "Mi@Dim7T"
+  connect_devices:
+    - "mds9222_1"
+    - "mds9222_2"
+
+unity_psd:
+  name: "UNITY_PSD"
+  description: "FSS Unity"
+  location: "EMC"
+  serial_number: "CKM00180801254"
+  credentials:
+    - purpose: "Management Access"
+      ip_address: "10.118.58.61"
+      username: "admin"
+      password: "Password123!"
+  connect_devices:
+    - "mds9222_1"
+    - "mds9222_2"
+
+mds9222_1:
+  name: "PSD_Primary_MDS_1"
+  description: ""
+  location: "EMC"
+  serial_number: "FOX1535GKGS"
+  # vplexs: ['VPLEX#5', 'VPLEX#3']
+  credentials:
+    - purpose: "Management Access"
+      ip_address: "10.118.45.35"
+      username: "admin"
+      password: "TSSswitch@dmin"
+  vplex_connection:
+    - vplex_name: "VPLEX#5"
+      vsanid: "2"
+      vplex_fe_ports:
+        - pwwn: "50:00:14:42:80:1e:fc:00"
+          name: "P00000000472002EB-A0-FC02"
+        - pwwn: "50:00:14:42:90:1e:fc:00"
+          name: "P00000000473002EB-B0-FC02"
+    # - vplex_name: "VPLEX#3"
+    #   vsanid: "100"
+    #   vplex_fe_ports:
+    #     - pwwn: "test"
+    #       name: "test"
+    #     - pwwn: "hoge"
+    #       name: "hoge"
+  connect_devices:
+    - "unity_psd"
+    - "vplex_psd"
+
+
+mds9222_2:
+  name: "PSD_Primary_MDS_2"
+  description: ""
+  location: "EMC"
+  serial_number: "FOX1537G7KP"
+  # vplexs: ['VPLEX#5', 'VPLEX#3']
+  credentials:
+    - purpose: "Management Access"
+      ip_address: "10.118.45.36"
+      username: "admin"
+      password: "TSSswitch@dmin"
+  vplex_connection:
+    - vplex_name: "VPLEX#5"
+      vsanid: "3"
+      vplex_fe_ports:
+        - pwwn: "50:00:14:42:80:1e:fc:00"
+          name: "P00000000472002EB-A0-FC03"
+        - pwwn: "50:00:14:42:90:1e:fc:00"
+          name: "P00000000473002EB-B0-FC03"
+  #   - vplex_name: "VPLEX#3"
+  #     vsanid: "100"
+  #     vplex_fe_ports:
+  #       - pwwn: "test"
+  #         name: "test"
+  #       - pwwn: "hoge"
+  #         name: "hoge"
+  connect_devices:
+    - "unity_psd"
+    - "vplex_psd"
+
+
+# ----- Docomo Lab
+vplex_docomo:
+  name: "VPLEX_DoCoMo"
+  description: "Docomo VPLEX"
+  location: "EMC"
+  serial_number: "CKM00183400231"
+  credentials:
+    - purpose: "Management Access"
+      ip_address: "10.118.41.132"
+      username: "service"
+      password: "Mi@Dim7T"
+  connect_devices:
+    - "brocade_1"
+    - "brocade_2"
+
+unity_docomo:
+  name: "UNITY_PSD"
+  description: "Docomo Unity"
+  location: "EMC"
+  serial_number: "CETV3183500058"
+  credentials:
+    - purpose: "Management Access"
+      ip_address: "10.118.41.140"
+      username: "admin"
+      password: "Password123!"
+  connect_devices:
+    - "brocade_1"
+    - "brocade_2"
