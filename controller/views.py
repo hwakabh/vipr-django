@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+import os
+import logging
 
 from controller.models import CatalogHistory
 from controller.services import device_search
@@ -9,6 +11,8 @@ from controller.services import service_utils as svc
 from controller.forms import OperationForm
 from controller.forms import SearchForm
 
+logger = logging.getLogger('django')
+path_prefix = os.getcwd() + '/'
 
 # Create your views here.
 def front_main(request):
@@ -72,8 +76,8 @@ def front_main(request):
             logger.info('User confirmation declined. Initiatlize operation form, and git checkouted.')
             git_cmd = '/usr/bin/git checkout ' + path_prefix + 'residency/ansible/group_vars/all.yml'
             # ec, stdout, stderr = utils.kick_command_from_django(cmd=git_cmd)
-            if ec != 0:
-                logger.error('Failed to git checkouted.')
+            # if ec != 0:
+            #     logger.error('Failed to git checkouted.')
             view_action = 'returned'
 
         # elif 'run' in request.POST:
