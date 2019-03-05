@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- PRECHECK SECTION -->
+    <section id="redirect">
+        <div class="container">
+              <div class="row">
+
+                  <div class="col-md-12 col-sm-12">
+                        <div class="precheck-thumb">
+                            <div class="section-title">
+                                  <h2>Page Not Found</h2>
+                                  <p><strong>There's something wrong with running server.</strong></p>
+                            </div>
+                            <div class="redirection-desc">
+                                <p>
+                                    {% for line in msg %}
+                                        {{ line }}<br>
+                                    {% endfor %}
+                                </p>
+                                <a href="{% url 'home' %}" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Back to home</a>
+                            </div>
+                        </div>
+                  </div>
+
+              </div>
+        </div>
+    </section>
+{% endblock %}

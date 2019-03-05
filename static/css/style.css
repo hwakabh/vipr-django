@@ -409,37 +409,6 @@ a:hover, a:active, a:focus {
 }
 
 
-
-/*---------------------------------------
-  maintenances section
------------------------------------------*/
-
-#maintenances .maintenances-thumb {
-  border-radius: 5px;
-  margin-bottom: 15px;
-  padding: 0;
-  overflow: hidden;
-  position: relative;
-  top: 0;
-  -webkit-transition: all ease-in-out 0.4s;
-  transition: all ease-in-out 0.4s;
-}
-
-#maintenances .maintenances-thumb:hover {
-  background: #ffffff;
-  box-shadow: 0px 16px 22px 0px rgba(90, 91, 95, 0.3);
-  top: -5px;
-}
-
-#maintenances .maintenances-thumb img {
-  border-radius: 5px;
-  margin: auto;
-  padding-top: auto;
-  width: 240px;
-  height: 100px;
-}
-
-
 /* ------------------------------------- /
 /    Footer
 /* ------------------------------------- */
@@ -505,13 +474,7 @@ a:hover, a:active, a:focus {
 }
 
 @media (max-width: 980px) {
-
  h1 {font-size: 33px;}
-
- #maintenances .maintenances-thumb {
-  margin-top: 30px;
- }
-
 }
 
 

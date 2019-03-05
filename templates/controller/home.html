@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    {% if view_action == '' %}
+    <!-- HOME SECTION -->
+    <section id="home">
+        <div class="container">
+              <div class="row">
+
+                  <div class="col-md-3 col-sm-3">
+                        <img src="{% static 'img/logo.jpg' %}" class="wow fadeInUp img-responsive img-circle" data-wow-delay="0.2s" alt="about image">
+                  </div>
+
+                  <div class="col-md-9 col-sm-9">
+                        <h1 class="wow fadeInUp" data-wow-delay="0.6s">{ vipr_django }</h1>
+                            <form action="{% url 'home' %}" method="post">
+                                {% csrf_token %}
+                                <button id="submit" type="submit" class="form-control" name="choice">Get Started</button>
+                            </form>
+                  </div>
+
+              </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if view_action == 'select' %}
+    <!-- User Choice -->
+    <section id="choice">
+        <div class="container">
+              <div class="row">
+
+                  <div class="col-md-12 col-sm-12">
+                        <div class="precheck-thumb">
+                            <div class="wow fadeInUp section-title" data-wow-delay="0.2s">
+                                  <h2>Select what to do</h2>
+                                  <p><strong>Starting first, please choose what you will do on this service.</strong></p>
+                            </div>
+                            <div class="wow fadeInUp" data-wow-delay="0.4s">
+                                <form action="{% url 'home' %}" method="post">
+                                    {% csrf_token %}
+                                    <button id="submit" type="submit" class="form-control" name="precheck">Prechecking Current</button>
+                                    <p>
+                                        <span>Jump to device-search pages.</span><br>
+                                        Querying to internal MongoDB, device-search provides storage configurations or zone information with the key of servername. <br>
+                                        You can find the configurations or device information out on this page.<br>
+                                        Note that data of each device within internal MongoDB would be refreshed by day with crond.
+                                    </p>
+                                    <button id="submit" type="submit" class="form-control" name="start_ops">Starting operations</button>
+                                    <p>
+                                        <span>Move directly to operaion form page.</span> <br>
+                                        If you already confirm each configuration of storage devices to make operations, provide parameters to catalog.<br>
+                                        [TBD] You can select "Create New Volume" / "Expand current Volume" / "Make changes of current Volume".
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                  </div>
+
+              </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if view_action == 'precheck' %}
+    <!-- PRECHECK SECTION -->
+    <section id="precheck">
+        <div class="container">
+              <div class="row">
+
+                  <div class="col-md-12 col-sm-12">
+                        <div class="precheck-thumb">
+                            <div class="wow fadeInUp section-title" data-wow-delay="0.2s">
+                                  <h2>Prechecking Before Your Operations</h2>
+                                  <p><strong>Identify your target storage/server and confirm your ops.</strong></p>
+                            </div>
+                            <div class="wow fadeInUp" data-wow-delay="0.4s">
+                                <form action="{% url 'home' %}" method="post">
+                                    {% csrf_token %}
+                                    {{ search_form.as_p }}
+                                    <p>
+                                        On this section, you can find storage configurations from the target server name.<br>
+                                        Query with the key of servername would be run to internal MongoDB.
+                                    </p>
+                                    <button id="submit" type="submit" class="form-control" name="search">Run query</button>
+                                </form>
+                            </div>
+                        </div>
+                  </div>
+
+              </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if view_action == 'search_result' %}
+    <!-- (SEARCH) RESULTS SECTION -->
+    <section id="results">
+        <div class="container">
+              <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="wow fadeInUp section-title" data-wow-delay="0.2s">
+                            <h2>Search Results</h2>
+                            <p>Query results with keyword [ {{ mongodb_key }} ]</p>
+                                <h3><b>VPLEX storage-views : </b> <span>{{ find_result|length }} storage-view(s) found in database.</span></h3>
+                                <p> 
+                                    {% for storage_view in find_result %}
+                                    <h4><span># Name of storage-view: </span></h4> {{ storage_view.attributes.3.value }}
+                                    <h4>== Initiator Ports assigned to storage-view: </h4> {{ storage_view.attributes.2.value }}
+                                    <h4>== VPLEX FrontEnd Ports assigned to storage-view: </h4> {{ storage_view.attributes.5.value }}
+                                    <h4>== Attached virtual-volume(s) count: </h4> {{ storage_view.attributes.7.value|length }} virtual-volume(s)
+                                        {% for maps in storage_view.attributes.7.value %}
+                                        <h5><span>{{ maps.virtual_volume }}</span></h5> 
+                                        <h5>==== Associated local-device: {{ maps.local_device }}</h5> 
+                                        <h5>==== Associated extent: {{ maps.extent }}</h5> 
+                                        <h5>==== Associated storage-volume: {{ maps.storage_volume }}</h5> 
+                                        <h5>==== Associated logical-unity: {{ maps.logical_unit }}</h5> 
+                                        <h5>==== Backend storage-array: {{ maps.storage_array }}</h5> 
+                                        <h5>==== TBD: Backend LUN Name {{ maps.storage_array }}</h5> 
+                                        <h5>==== TBD: Backend LUN Name {{ maps.storage_array }}</h5> 
+                                        {% endfor %}
+                                    <br>
+                                    <br>
+                                    {% endfor %}
+                                </p>
+                        </div>
+                    </div>
+
+                    <form action="{% url 'home' %}" method="post">
+                        {% csrf_token %}
+                        <button id="submit" type="submit" class="form-control" name="start_ops">Starting Ops</button>
+                        <p>Redirect to operation page.</p>
+                        <button id="submit" type="submit" class="form-control" name="">Back to Home</button>
+                        <p>Going back to home.</p>
+                    </form>
+                 
+              </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if view_action == 'operations' or view_action == 'check_config' or view_action == 'run_ansible' or view_action == 'returned' or view_action == 'invalid'     %}
+    <!-- OPERATIONS SECTION -->
+    <section id="operations">
+        <div class="container">
+              <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                        <div class="wow fadeInUp section-title" data-wow-delay="0.2s">
+                            <h2>Operations</h2>
+                            <p>Now you can start your operations. At the backend of this service, Ansible would be worked.</p>
+                        </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                        {% if view_action == 'operations' or view_action == 'returned' %}
+                        <p>
+                            <span>
+                                Create/Modify Volumes. <br>
+                                Select the parameters to be configured.
+                            </span>
+                        </p>
+                        <form action="{% url 'home' %}" method="post">
+                            {% csrf_token %}
+                            <table class="table">{{ ops_form }}</table>
+                            <button id="submit" type="submit" class="form-control" name="confirm">Confirm</button>
+                        </form>
+
+                        {% elif view_action == 'check_config' %}
+                        <p><span>Review provided parameters. Making sure the parameters are same as what you expect.</span></p>
+                        <form action="{% url 'home' %}" method="post">
+                            <p>
+                                {% csrf_token %}
+                                {% for line in data_confirm_server %}
+                                    {{ line }}<br>
+                                {% endfor %}
+                                <br>
+                                {% for line in data_confirm_storage %}
+                                    {{ line }}<br>
+                                {% endfor %}
+                                <br>
+                                {% for line in data_confirm_switch %}
+                                    {{ line }}<br>
+                                {% endfor %}
+                            </p>
+                            <button id="submit" type="submit" class="form-control" name="back">Back</button>
+                            <button id="submit" type="submit" class="form-control" name="run">Run</button>
+                        </form>
+
+                        {% elif view_action == 'invalid' %}
+                        <p><span>Some configuration mismatch detected.</span></p>
+                        <p>Please confirm physical connectivity and enter parameters properly.</p>
+                        <form action="{% url 'home' %}" method="post">
+                            {% csrf_token %}
+                            <button id="submit" type="submit" class="form-control" name="back">Back</button>
+                            <button id="submit" type="submit" class="form-control" name="precheck">Go to DeviceSearch</button>
+                        </form>
+
+                        {% elif view_action == 'run_ansible' %}
+                        <form action="{% url 'home' %}" method="post">
+                            {% csrf_token %}
+                            <!-- PRE LOADER -->
+                            <div class="preloader">
+                                <div class="spinner">
+                                    <span class="spinner-rotate"></span>
+                                </div>
+                            </div>
+                            <p>
+                                Playbook executed.<br><b>Result --- {{ result_summary }}</b><br>
+                                <br>
+                                <br>
+                                {% for line in data_result %}
+                                    {{ line }}<br>
+                                {% endfor %}
+                                <button id="submit" type="submit" class="form-control" name="">Back to Home</button>
+                            </p>
+                        </form>
+                        {% endif %}
+                  </div>
+              </div>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock %}
