@@ -122,3 +122,41 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/'),
 ]
+
+# Logging
+# If running django apps under httpd:
+#    - Permission of the log files should be 744(user `apache` exec logging)
+#    - Firewall configuration shold be `Permissive` (setenforce 0)
+
+LOG_FILENAME = 'django.log'
+if not os.path.exists(LOG_FILENAME):
+    open(LOG_FILENAME, 'a').close()
+
+
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'all': {
+            'format': '%(asctime)s : %(name)s - %(levelname)s : %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, LOG_FILENAME),
+            'formatter': 'all',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'all'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+        },
+    },
+}
