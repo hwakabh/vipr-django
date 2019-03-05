@@ -8,7 +8,7 @@ path_prefix = os.getcwd() + '/'
 
 
 def get_device_mismatch_check(data):
-    connect_device_filename = path_prefix + 'ansible/group_vars/devices_examples.yml'
+    connect_device_filename = path_prefix + 'controller/ansible/group_vars/devices_examples.yml'
     with open(connect_device_filename, 'r') as cdf:
         c = cdf.read()
     configs = yaml.safe_load(c)
@@ -16,8 +16,9 @@ def get_device_mismatch_check(data):
     input_vplex = data['vplex_name'].lower()
     input_mds1 = data['primary_mds_switch'].lower()
     input_mds2 = data['secondary_mds_switch'].lower()
-    
-    connect_device = configs[input_vplex]['connect_devices']
+
+    # TODO: added error handling case if not found.
+    connect_device = configs[input_vplex.replace('#','_')]['connect_devices']
     is_found_mds1 = False
     is_found_mds2 = False
     if input_mds1.replace('#', '_') in connect_device:

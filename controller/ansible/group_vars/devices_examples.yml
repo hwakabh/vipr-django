@@ -16,7 +16,7 @@ vnx5300_1:
     - "mds9222_1"
     - "mds9222_2"
 
-vplex_psd:
+vplex_1:
   name: "VPLEX_PSD"
   description: "VS6 Model Federrer"
   location: "EMC"
@@ -30,7 +30,7 @@ vplex_psd:
     - "mds9222_1"
     - "mds9222_2"
 
-unity_psd:
+unity_1:
   name: "UNITY_PSD"
   description: "FSS Unity"
   location: "EMC"
@@ -44,7 +44,7 @@ unity_psd:
     - "mds9222_1"
     - "mds9222_2"
 
-mds9222_1:
+mds9222_3:
   name: "PSD_Primary_MDS_1"
   description: ""
   location: "EMC"
@@ -71,11 +71,11 @@ mds9222_1:
     #     - pwwn: "hoge"
     #       name: "hoge"
   connect_devices:
-    - "unity_psd"
-    - "vplex_psd"
+    - "unity_1"
+    - "vplex_1"
 
 
-mds9222_2:
+mds9222_4:
   name: "PSD_Primary_MDS_2"
   description: ""
   location: "EMC"
@@ -102,35 +102,5 @@ mds9222_2:
   #       - pwwn: "hoge"
   #         name: "hoge"
   connect_devices:
-    - "unity_psd"
-    - "vplex_psd"
-
-
-# ----- Docomo Lab
-vplex_docomo:
-  name: "VPLEX_DoCoMo"
-  description: "Docomo VPLEX"
-  location: "EMC"
-  serial_number: "CKM00183400231"
-  credentials:
-    - purpose: "Management Access"
-      ip_address: "10.118.41.132"
-      username: "service"
-      password: "Mi@Dim7T"
-  connect_devices:
-    - "brocade_1"
-    - "brocade_2"
-
-unity_docomo:
-  name: "UNITY_PSD"
-  description: "Docomo Unity"
-  location: "EMC"
-  serial_number: "CETV3183500058"
-  credentials:
-    - purpose: "Management Access"
-      ip_address: "10.118.41.140"
-      username: "admin"
-      password: "Password123!"
-  connect_devices:
-    - "brocade_1"
-    - "brocade_2"
+    - "unity_1"
+    - "vplex_1"
