@@ -42,7 +42,7 @@ def front_main(request):
             if search_form.is_valid:
                 mongodb_key = str(request.POST['server_name'])
                 logger.info('Start device-search for ' + mongodb_key)
-                # find_result = device_search.get_storage_view_from_mongo(user_input=mongodb_key)
+                find_result = device_search.get_storage_view_from_mongo(user_input=mongodb_key)
                 view_action = 'search_result'
 
         elif 'start_ops' in request.POST:
@@ -55,17 +55,17 @@ def front_main(request):
             view_action = 'check_config'
             if ops_form.is_valid():
                 logger.info('Making modifications to ansible configuration file...')
-                # data = utils.modify_ansible_conf_file(user_input=request.POST)
-                # data_confirm_server, data_confirm_storage, data_confirm_switch = utils.parse_confirm_data(modified_data=data)
+                data = svc.modify_ansible_conf_file(user_input=request.POST)
+                data_confirm_server, data_confirm_storage, data_confirm_switch = svc.parse_confirm_data(modified_data=data)
                 # Throw input data to Django model
                 logger.info('Saving catalog data to Django models...')
                 CatalogHistory.objects.create(**ops_form.cleaned_data)
 
-                # check_result1, check_result2 = utils.get_device_mismatch_check(data=request.POST)
-                # if check_result1 and check_result2:
-                #     pass
-                # else:
-                #     view_action = 'invalid'
+                check_result1, check_result2 = svc.get_device_mismatch_check(data=request.POST)
+                if check_result1 and check_result2:
+                    pass
+                else:
+                    view_action = 'invalid'
 
         elif 'back' in request.POST:
             ops_form = OperationForm()
@@ -74,43 +74,43 @@ def front_main(request):
             CatalogHistory.objects.order_by('-id')[0].delete()
 
             logger.info('User confirmation declined. Initiatlize operation form, and git checkouted.')
-            git_cmd = '/usr/bin/git checkout ' + path_prefix + 'residency/ansible/group_vars/all.yml'
-            # ec, stdout, stderr = utils.kick_command_from_django(cmd=git_cmd)
-            # if ec != 0:
-            #     logger.error('Failed to git checkouted.')
+            git_cmd = '/usr/bin/git checkout ' + path_prefix + 'controller/ansible/group_vars/all.yml'
+            ec, stdout, stderr = svc.kick_command_from_django(cmd=git_cmd)
+            if ec != 0:
+                logger.error('Failed to git checkouted.')
             view_action = 'returned'
 
-        # elif 'run' in request.POST:
-        #     ops_form = {}
-        #     logger.info('User confirmation accepted. Add and Commit residency/ansible/group_vars/all.yml.')
-        #     git_cmd = '/usr/bin/git add ' + path_prefix + 'residency/ansible/group_vars/all.yml'
-        #     ec, stdout, stderr = utils.kick_command_from_django(cmd=git_cmd)
+        elif 'run' in request.POST:
+            ops_form = {}
+            logger.info('User confirmation accepted. Add and Commit controller/ansible/group_vars/all.yml.')
+            git_cmd = '/usr/bin/git add ' + path_prefix + 'controller/ansible/group_vars/all.yml'
+            ec, stdout, stderr = svc.kick_command_from_django(cmd=git_cmd)
 
-        #     logger.info('Started to run ansible-playbook commands !!')
+            logger.info('Started to run ansible-playbook commands !!')
 
-        #     data_result = []
-        #     ansible_cmd = 'ansible-playbook -vvv ' + path_prefix + 'residency/ansible/add_new_volumes.yml'
-        #     ec, stdout, stderr = utils.kick_command_from_django(cmd=ansible_cmd)
-        #     if ec != 0:
-        #         result_summary = '>>> Ansible Command failed with some errors. '
-        #         logger.error('Failed to executed ansible command, reverting back the configuration file.')
-        #         git_cmd = '/usr/bin/git reset HEAD ' + path_prefix + 'residency/ansible/group_vars/all.yml'
-        #         ec, stdout, stderr = utils.kick_command_from_django(cmd=git_cmd)
-        #         git_cmd = '/usr/bin/git checkout ' + path_prefix + 'residency/ansible/group_vars/all.yml'
-        #         ec, stdout, stderr = utils.kick_command_from_django(cmd=git_cmd)
-        #         for line in stderr.splitlines():
-        #             data_result.append(line)
-        #     else:
-        #         result_summary = '>>> Successfully Done. Stdout: '
-        #         for line in stdout.splitlines():
-        #             data_result.append(line)
-        #         # Updating and commiting the group_vars/all.yml
-        #         now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-        #         # git_cmd = '/usr/bin/git commit -m \"{0} Operation complete. {1}\"'.format(now, request.data['message'])
-        #         # ec, stdout, stderr = utils.kick_command_from_django(cmd=git_cmd)
-        #         # logger.info('Local git repository updated.')
+            data_result = []
+            ansible_cmd = 'ansible-playbook -vvv ' + path_prefix + 'controller/ansible/add_new_volumes.yml'
+            ec, stdout, stderr = svc.kick_command_from_django(cmd=ansible_cmd)
+            if ec != 0:
+                result_summary = '>>> Ansible Command failed with some errors. '
+                logger.error('Failed to executed ansible command, reverting back the configuration file.')
+                git_cmd = '/usr/bin/git reset HEAD ' + path_prefix + 'controller/ansible/group_vars/all.yml'
+                ec, stdout, stderr = svc.kick_command_from_django(cmd=git_cmd)
+                git_cmd = '/usr/bin/git checkout ' + path_prefix + 'controller/ansible/group_vars/all.yml'
+                ec, stdout, stderr = svc.kick_command_from_django(cmd=git_cmd)
+                for line in stderr.splitlines():
+                    data_result.append(line)
+            else:
+                result_summary = '>>> Successfully Done. Stdout: '
+                for line in stdout.splitlines():
+                    data_result.append(line)
+                # Updating and commiting the group_vars/all.yml
+                now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+                # git_cmd = '/usr/bin/git commit -m \"{0} Operation complete. {1}\"'.format(now, request.data['message'])
+                # ec, stdout, stderr = svc.kick_command_from_django(cmd=git_cmd)
+                # logger.info('Local git repository updated.')
 
-        #     view_action = 'run_ansible'
+            view_action = 'run_ansible'
 
     return render(request, 'home.html',{
         'search_form': search_form,
