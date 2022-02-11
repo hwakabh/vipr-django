@@ -6,7 +6,7 @@ cffi==1.12.2
 chardet==3.0.4
 cryptography==3.3.2
 Django==2.2.27
-django-filter==2.1.0
+django-filter==2.4.0
 djangorestframework==3.11.2
 idna==2.8
 Jinja2==2.11.3
